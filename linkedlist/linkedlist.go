@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package linkedlist
 
 type Node struct {
 	Data interface{}
@@ -11,7 +9,7 @@ type LinkedList struct {
 	Head *Node
 }
 
-func newLinkedList() *LinkedList {
+func New() *LinkedList {
 	return &LinkedList{
 		Head: nil,
 	}
@@ -22,7 +20,7 @@ func newNode(data interface{}) *Node {
 	return &Node
 }
 
-func (ll LinkedList) list() []interface{} {
+func (ll LinkedList) List() []interface{} {
 	currentNode := ll.Head
 
 	list := []interface{}{}
@@ -35,7 +33,7 @@ func (ll LinkedList) list() []interface{} {
 	return list
 }
 
-func (ll LinkedList) size() int {
+func (ll LinkedList) Size() int {
 	count := 0
 	currentNode := ll.Head
 	for currentNode != nil {
@@ -45,7 +43,7 @@ func (ll LinkedList) size() int {
 	return count
 }
 
-func (ll *LinkedList) append(data interface{}) {
+func (ll *LinkedList) Append(data interface{}) {
 	newNode := newNode(data)
 	current := ll.Head
 
@@ -60,7 +58,7 @@ func (ll *LinkedList) append(data interface{}) {
 	return
 }
 
-func (ll *LinkedList) delete(v interface{}) {
+func (ll *LinkedList) Delete(v interface{}) {
 
 	if ll.Head.Data == v {
 		ll.Head = ll.Head.Next
@@ -78,23 +76,15 @@ func (ll *LinkedList) delete(v interface{}) {
 	return
 }
 
-func main() {
-	ll := newLinkedList()
-	ll.append(1)
-	ll.append(2)
-	ll.append(3)
+func (ll *LinkedList) AddToHead(v interface{}) {
+	newNode := newNode(v)
 
-	fmt.Println(ll.list())
-
-	ll.delete(1)
-	fmt.Println(ll.list())
-
-	ll.delete(3)
-	fmt.Println(ll.list())
-}
-
-func assert(predicate bool, message string) {
-	if !predicate {
-		panic(message)
+	if ll.Head == nil {
+		ll.Head = newNode
+		return
 	}
+	t := ll.Head
+	ll.Head = newNode
+	ll.Head.Next = t
+	return
 }
