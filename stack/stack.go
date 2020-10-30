@@ -12,26 +12,24 @@ func New() *Stack {
 	}
 }
 
-func (s *Stack) Empty() bool {
+func (s *Stack) IsEmpty() bool {
 	return s.ll.Head == nil
 }
 
 func (s *Stack) Peek() interface{} {
-	if s.Empty() {
+	if s.IsEmpty() {
 		return nil
 	}
 	return s.ll.Head.Data
 }
 
 func (s *Stack) Pop() interface{} {
-	if s.Empty() {
+	if s.IsEmpty() {
 		return nil
 	}
-	v := s.ll.Head.Data
-	s.ll.Delete(v)
-	return v
+	return s.ll.RemoveHead()
 }
 
-func (s *Stack) Add(v interface{}) {
-	s.ll.AddToHead(v)
+func (s *Stack) Push(v interface{}) {
+	s.ll.AddHead(v)
 }

@@ -20,7 +20,7 @@ func newNode(data interface{}) *Node {
 	return &Node
 }
 
-func (ll LinkedList) List() []interface{} {
+func (ll LinkedList) ToArray() []interface{} {
 	currentNode := ll.Head
 
 	list := []interface{}{}
@@ -58,25 +58,35 @@ func (ll *LinkedList) Append(data interface{}) {
 	return
 }
 
-func (ll *LinkedList) Delete(v interface{}) {
+// removes the first occurrence of v
+func (ll *LinkedList) Remove(v interface{}) bool {
 
 	if ll.Head.Data == v {
 		ll.Head = ll.Head.Next
-		return
+		return true
 	}
 
 	current := ll.Head
 	for current != nil {
 		if current.Next.Data == v {
 			current.Next = current.Next.Next
-			return
+			return true
 		}
 		current = current.Next
 	}
-	return
+	return false
 }
 
-func (ll *LinkedList) AddToHead(v interface{}) {
+func (ll *LinkedList) RemoveHead() interface{} {
+	if ll.Head != nil {
+		data := ll.Head.Data
+		ll.Head = ll.Head.Next
+		return data
+	}
+	return nil
+}
+
+func (ll *LinkedList) AddHead(v interface{}) {
 	newNode := newNode(v)
 
 	if ll.Head == nil {
