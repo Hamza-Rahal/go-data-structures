@@ -23,14 +23,14 @@ func newNode(data interface{}) *Node {
 func (ll LinkedList) ToArray() []interface{} {
 	currentNode := ll.Head
 
-	list := []interface{}{}
+	array := []interface{}{}
 
 	for currentNode != nil {
-		list = append(list, currentNode.Data)
+		array = append(array, currentNode.Data)
 		currentNode = currentNode.Next
 	}
 
-	return list
+	return array
 }
 
 func (ll LinkedList) Size() int {

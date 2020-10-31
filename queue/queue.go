@@ -22,10 +22,10 @@ func (q *Queue) Enqueue(data interface{}) {
 	return
 }
 
-func (q *Queue) Dequeue(data interface{}) interface{} {
+func (q *Queue) Dequeue() interface{} {
 	return q.ll.RemoveHead()
 }
 
 func (q *Queue) IsEmpty() bool {
-	return q.ll.IsEmpty()
+	return q.ll.Size() == 0
 }
