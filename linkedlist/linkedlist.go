@@ -1,8 +1,8 @@
 package linkedlist
 
 type Node struct {
-	Data interface{}
-	Next *Node
+	data interface{}
+	next *Node
 }
 
 type LinkedList struct {
@@ -16,7 +16,7 @@ func New() *LinkedList {
 }
 
 func newNode(data interface{}) *Node {
-	Node := Node{Data: data}
+	Node := Node{data: data}
 	return &Node
 }
 
@@ -26,8 +26,8 @@ func (ll LinkedList) ToArray() []interface{} {
 	array := []interface{}{}
 
 	for currentNode != nil {
-		array = append(array, currentNode.Data)
-		currentNode = currentNode.Next
+		array = append(array, currentNode.data)
+		currentNode = currentNode.next
 	}
 
 	return array
@@ -38,11 +38,12 @@ func (ll LinkedList) Size() int {
 	currentNode := ll.Head
 	for currentNode != nil {
 		count++
-		currentNode = currentNode.Next
+		currentNode = currentNode.next
 	}
 	return count
 }
 
+// Append adds a node at the tail of the list
 func (ll *LinkedList) Append(data interface{}) {
 	newNode := newNode(data)
 	current := ll.Head
@@ -51,36 +52,36 @@ func (ll *LinkedList) Append(data interface{}) {
 		ll.Head = newNode
 		return
 	}
-	for current.Next != nil {
-		current = current.Next
+	for current.next != nil {
+		current = current.next
 	}
-	current.Next = newNode
+	current.next = newNode
 	return
 }
 
-// removes the first occurrence of v
+// Remove removes the first occurrence of v
 func (ll *LinkedList) Remove(v interface{}) bool {
 
-	if ll.Head.Data == v {
-		ll.Head = ll.Head.Next
+	if ll.Head.data == v {
+		ll.Head = ll.Head.next
 		return true
 	}
 
 	current := ll.Head
 	for current != nil {
-		if current.Next.Data == v {
-			current.Next = current.Next.Next
+		if current.next.data == v {
+			current.next = current.next.next
 			return true
 		}
-		current = current.Next
+		current = current.next
 	}
 	return false
 }
 
 func (ll *LinkedList) RemoveHead() interface{} {
 	if ll.Head != nil {
-		data := ll.Head.Data
-		ll.Head = ll.Head.Next
+		data := ll.Head.data
+		ll.Head = ll.Head.next
 		return data
 	}
 	return nil
@@ -95,6 +96,6 @@ func (ll *LinkedList) AddHead(v interface{}) {
 	}
 	t := ll.Head
 	ll.Head = newNode
-	ll.Head.Next = t
+	ll.Head.next = t
 	return
 }

@@ -22,3 +22,14 @@ func TestInsert(t *testing.T) {
 
 	assert.Equal(t, 4, bn.Size())
 }
+
+func TestHeight(t *testing.T) {
+	bn := New()
+
+	bn.Insert(1)
+	bn.Insert(1)
+	bn.Insert(1)
+	bn.Insert(1)
+
+	assert.Equal(t, 2, bn.Height())
+}

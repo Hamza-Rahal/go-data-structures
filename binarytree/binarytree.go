@@ -1,7 +1,10 @@
 package binarytree
 
-import "../queue"
+import (
+	"../queue"
+)
 
+// https://en.wikipedia.org/wiki/Binary_tree#:~:text=In%20computer%20science%2C%20a%20binary,child%20and%20the%20right%20child.
 type Node struct {
 	data  interface{}
 	left  *Node
@@ -18,6 +21,7 @@ func New() *BinaryTree {
 	}
 }
 
+// O(n) time complexity
 func (bn *BinaryTree) Insert(data interface{}) {
 	newNode := &Node{
 		data: data,
@@ -79,5 +83,27 @@ func (bn *BinaryTree) Traverse() []interface{} {
 		queue.Enqueue(node.(*Node).right)
 	}
 
+	return a
+}
+
+func (bn *BinaryTree) Height() int {
+	return height(bn.root)
+}
+
+func height(root *Node) int {
+	if root == nil || isLeaf(*root) {
+		return 0
+	}
+	return max(height(root.left), height(root.right)) + 1
+}
+
+func isLeaf(node Node) bool {
+	return (node.left == nil && node.right == nil)
+}
+
+func max(a int, b int) int {
+	if a <= b {
+		return b
+	}
 	return a
 }
